@@ -4,7 +4,7 @@
 
         <input v-model="password" type="password" class="form-control mb-3" placeholder="Password">
 
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button @click.prevent="login" type="submit" class="btn btn-primary">Submit</button>
     </div>
 </template>
 
@@ -16,6 +16,18 @@ export default {
             password: '',
         }
     },
+
+    methods: {
+        login() {
+            axios.post('/api/auth/login', {
+                email: this.email,
+                password: this.password,
+            })
+                .then(res => {
+                    localStorage.setItem('access_token', res.data.access_token)
+                })
+        },
+    }
 }
 </script>
 

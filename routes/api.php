@@ -25,12 +25,16 @@ Route::group(['middleware' => 'api', 'prefix' => 'auth'], function ($router) {
     Route::post('logout', [App\Http\Controllers\AuthController::class, 'logout']);
     Route::post('refresh', [App\Http\Controllers\AuthController::class, 'refresh']);
     Route::post('me', [App\Http\Controllers\AuthController::class, 'me']);
+
+    Route::group(['middleware' => 'auth:api'], function () {
+        Route::group(['prefix' => 'fruits'], function () {
+            Route::get('/', Fruit\IndexController::class);
+        });
+    });
 });
 
 Route::group(['prefix' => 'users'], function () {
     Route::post('/', User\StoreController::class);
 });
 
-Route::group(['prefix' => 'fruits'], function () {
-    Route::get('/', Fruit\IndexController::class);
-});
+
