@@ -3,6 +3,7 @@
         <router-link :to="{ name: 'fruit.index' }">Fruits</router-link>
         <router-link :to="{ name: 'user.login' }">Login</router-link>
         <router-link :to="{ name: 'user.register' }">Register</router-link>
+        <router-link :to="{ name: 'user.cabinet' }">Cabinet</router-link>
         <router-view></router-view>
     </div>
 </template>

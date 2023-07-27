@@ -18,23 +18,24 @@
 </template>
 
 <script>
-    export default {
-        data() {
-            return {
-                fruits: [],
-            }
-        },
+import API from "@/api";
+export default {
+    data() {
+        return {
+            fruits: [],
+        }
+    },
 
-        mounted() {
-            this.getFruits()
+    mounted() {
+        this.getFruits()
+    },
+    methods: {
+        getFruits() {
+            API.get('/api/auth/fruits')
+                .then(res => {
+                    this.fruits = res.data.data;
+                });
         },
-        methods: {
-            getFruits() {
-                axios.get('/api/fruits')
-                    .then(res => {
-                        this.fruits = res.data.data;
-                    });
-            },
-        },
-    }
+    },
+}
 </script>

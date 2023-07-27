@@ -3,11 +3,6 @@ import {createRouter, createWebHistory} from 'vue-router'
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes: [
-        // {
-        //     path: '/',
-        //     name: 'main',
-        //     component: () => import('../components/Index.vue')
-        // },
         {
             path: '/fruits',
             name: 'fruit.index',
@@ -23,7 +18,11 @@ const router = createRouter({
             name: 'user.register',
             component: () => import('../components/User/Register.vue')
         },
-
+        {
+            path: '/users/cabinet',
+            name: 'user.cabinet',
+            component: () => import('../components/User/Cabinet.vue')
+        },
     ]
 })
 
