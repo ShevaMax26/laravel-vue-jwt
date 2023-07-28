@@ -8,7 +8,13 @@
 
         <input v-model="password_confirmation" type="password" class="form-control mb-3" placeholder="Confirm Password">
 
-        <button @click.prevent="store" type="submit" class="btn btn-primary">Submit</button>
+        <button @click.prevent="store" type="submit" class="btn btn-primary">Register</button>
+
+        <router-link :to="{name: 'user.login'}">
+            <p class="text-success mt-1">I have account</p>
+        </router-link>
+
+        <div v-if="error" class="text-danger mt-1">{{ error }}</div>
     </div>
 </template>
 
@@ -20,6 +26,7 @@ export default {
             email: '',
             password: '',
             password_confirmation: '',
+            error: '',
         }
     },
 
@@ -32,8 +39,12 @@ export default {
                 password_confirmation: this.password_confirmation,
             })
                 .then(res => {
-                    console.log(res);
-                });
+                    localStorage.setItem('access_token', res.data.access_token)
+                    this.$router.push({name: 'user.cabinet'})
+                })
+                .catch(error => {
+                    this.error = error.response.data.error;
+                })
         },
     },
 
